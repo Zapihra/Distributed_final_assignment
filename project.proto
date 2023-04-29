@@ -1,0 +1,63 @@
+syntax = "proto3";
+
+package project;
+
+service LogInService {
+    rpc CheckLogIn(CredentialsRequest) returns (CredentialsResponse) {}
+}
+
+service SearcherService {
+    rpc SearchOne(OneRequest) returns (OneResponse){}
+
+    rpc SearchView(ViewRequest) returns (stream ViewResponse){}
+}
+
+service reader {
+    rpc viewHeadlines(HeadRequest) returns (stream HeadResponse) {}
+
+    rpc showBlog(BlogRequest) returns (BlogResponse) {}
+
+    rpc commentBlog(CommentRequest) returns (CommentResponse) {}
+}
+
+message HeadRequest {
+    string userHead = 1;
+}
+message HeadResponse {
+    string head = 1;
+}
+message BlogRequest {
+    string head = 1;
+}
+message BlogResponse {
+    string head = 1;
+    string blog = 2;
+}
+message CommentRequest {
+    string comment = 1;
+    string head = 2;
+}
+message CommentResponse {
+    bool add = 1;
+}
+
+
+message OneRequest {
+    string user = 1;
+}
+message OneResponse {
+    string user = 1;
+    bool find = 2;
+}
+message ViewRequest {
+    bool find = 1;
+}
+message ViewResponse {
+    string user = 1;
+}
+message CredentialsRequest {
+    string message = 1;
+}
+message CredentialsResponse {
+    bool logged = 1;
+}
